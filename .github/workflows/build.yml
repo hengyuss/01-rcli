@@ -20,6 +20,12 @@ jobs:
         platform: [ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: UpdateSource
+        run: |
+            rm /etc/apt/sources.list
+            echo 'deb http://archive.debian.org/debian buster main contrib non-free'  >> /etc/apt/sources.list
+            echo 'deb http://archive.debian.org/debian buster-updates main contrib non-free'  >> /etc/apt/sources.list
+            echo 'deb http://archive.debian.org/debian-security buster/updates main contrib non-free'  >> /etc/apt/sources.list
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
